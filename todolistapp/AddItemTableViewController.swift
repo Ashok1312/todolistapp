@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+protocol AddItemViewControllerDelegate: class {
+    func addItemViewControllerDidCancel(_ controller: AddItemTableViewController)
+    func addItemViewController(_ controller: AddItemTableViewController, didFinishAdding item: CheckListItem)
+}
+
 class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
 
     @IBOutlet var textField: UITextField!
@@ -15,6 +21,10 @@ class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+    
+    weak var delegate: AddItemViewControllerDelegate?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
@@ -28,8 +38,14 @@ class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
 //    }
     
     @IBAction func done(){
-        navigationController?.popViewController(animated: true)
-        print(textField.text)
+//        navigationController?.popViewController(animated: true)
+//        print(textField.text)
+        
+        let item = CheckListItem()
+        item.text = textField.text!
+        item.checkMark = false
+        
+        delegate?.addItemViewController(self, didFinishAdding: item)
     
     }
     
@@ -39,6 +55,7 @@ class AddItemTableViewController: UITableViewController,UITextFieldDelegate {
     
     @IBAction func cancel(){
         navigationController?.popViewController(animated: true)
+        delegate?.addItemViewControllerDidCancel(self)
         
     }
     
