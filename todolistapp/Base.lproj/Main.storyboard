@@ -45,7 +45,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="J71-AU-YCa">
                             <connections>
                                 <action selector="addItem:" destination="gy4-dJ-mBF" id="vuP-vh-ZuK"/>
-                                <segue destination="OdA-Wi-9Vs" kind="show" id="RT5-oM-yit"/>
+                                <segue destination="OdA-Wi-9Vs" kind="show" identifier="AddItem" id="RT5-oM-yit"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
